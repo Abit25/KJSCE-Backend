@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
-    url('', include('social_django.urls', namespace='social'))
+    url('', include('social_django.urls', namespace='social')),
 ]

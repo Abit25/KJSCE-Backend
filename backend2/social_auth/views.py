@@ -7,6 +7,8 @@ from sklearn.ensemble import AdaBoostClassifier
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from rest_framework.response import Response
+from getCoverage import getCoverage
+from models import CustomUser
 
 def logout_view(request):
     logout(request)
@@ -15,12 +17,15 @@ def logout_view(request):
 
 class ResumeSubmit(APIView):
     def post(self, request, *args, **kwargs):
+
+        data = json.loads(request.body.decode('utf-8'))
+
         user = request.user
-        workExperience =
-        porjects =
-        certifications =
-        technicalSkills =
-        educationalDetails =
+        # workExperience =
+        # porjects =
+        # certifications =
+        # technicalSkills =
+        # educationalDetails =
 
         features, postModel = pickle.load(open('classify.pkl','wb'))
         test_data = []
@@ -45,18 +50,40 @@ class ResumeSubmit(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        skills.recommendation =
+        # skills.recommendation =
 
         return Response({
             "skills_recommendation": skills_recommendation
         })
 
 
-
-
-
-
 class SearchQuery(APIView):
     def post(self, request, *args, **kwargs):
+        """
+        Fetch form data
+        """
+        data = json.loads(request.body.decode('utf-8'))
+
+        user = request.user
+        # workExperience =
+        # porjects =
+        # certifications =
+        # technicalSkills =
+        # educationalDetails =
+
+        query_dict = {}
+
+        all_users = CustomUser.objects.filter(recruiter=False)
+        coverage_list = []
+        for user in all_users:
+            coverage = getCoverage(user, query_dict)
+            if coverage['coverage'] > 0:
+                coverage_list.append(coverage)
+        coverage_list = sorted(coverage_list, key = lambda x : x['coverage'], reverse=True)
+
+        return Response({
+            "applicants": coverage_list
+        })
+
 
     def get(self, request, *args, **kwargs):

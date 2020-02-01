@@ -24,4 +24,10 @@ class CustomUser(AbstractUser):
         return self.id
 
 
+class Recommend(models.Model):
+    UniqueSkills = models.CharField(max_length=100, null=True)
+    labels = models.CharField(max_length=100, null=True)
+
+
+
 
