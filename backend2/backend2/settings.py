@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "social_django",
     "social_auth",
+    "rest_framework",
+
 ]
 
-AUTH_USER_MODEL = 'social_auth.CustomUser'
+# AUTH_USER_MODEL = 'social_auth.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
