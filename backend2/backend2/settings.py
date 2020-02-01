@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "social_auth",
 ]
 
+AUTH_USER_MODEL = 'social_auth.CustomUser'
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
