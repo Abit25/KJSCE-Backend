@@ -18,11 +18,13 @@ from django.urls import path
 from django.contrib.auth import login
 from django.conf import settings
 from django.conf.urls import url, include
-from social_auth.views import logout_view
+from social_auth.views import logout_view, checkLogin, ResumeSubmit
 
 urlpatterns = [
+    path("checkLogin/", checkLogin),
     path('admin/', admin.site.urls),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
-    url('', include('social_django.urls', namespace='social'))
+    url('', include('social_django.urls', namespace='social')),
+    path('demo/', ResumeSubmit.as_view(), name="resume")
 ]

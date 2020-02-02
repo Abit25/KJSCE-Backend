@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework.views import APIView
 import pickle
 import pandas as pd
@@ -7,6 +8,15 @@ from sklearn.ensemble import AdaBoostClassifier
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from rest_framework.response import Response
+import json
+from sklearn.externals import joblib
+
+
+def checkLogin(request):
+    if(not request.user.is_authenticated):
+        return JsonResponse({"error": "Please Authenticate"})
+    else:
+        return JsonResponse({"user": request.user.username}, safe=False)
 
 
 def logout_view(request):
@@ -17,14 +27,20 @@ def logout_view(request):
 class ResumeSubmit(APIView):
     def post(self, request, *args, **kwargs):
         user = request.user
+
         # workExperience =
         # porjects =
         # certifications =
         # technicalSkills =
         # educationalDetails =
+        # print(request.body)
+        data = json.loads(request.body.decode("utf-8"))
 
-        features, postModel = pickle.load(open('classify.pkl', 'wb'))
+        postModel = pickle.load(open(
+            '/Users/priya/Desktop/KJSCE/server/backend2/social_auth/classify.pkl', 'rb'))
+        print(len(postModel))
         test_data = []
+        print(postModel)
         for i in features:
             if i in technicalSkills:
                 test_data.append(1)
@@ -43,7 +59,7 @@ class ResumeSubmit(APIView):
         user.certifications = json.dumps(certifications)
         user.possiblePost = json.dumps(res)
         user.educationalDetails = json.dumps(educationalDetails)
-        return Respnse({'success': True}, status=status.HTTP_200_OK)
+        return Response({'success': True}, status=status.HTTP_200_OK)
 
     # def get(self, request, *args, **kwargs):
 

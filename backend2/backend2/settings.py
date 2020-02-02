@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "social_django",
     "social_auth",
     "rest_framework",
+    'corsheaders'
 
 ]
 
@@ -52,6 +53,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,6 +95,31 @@ DATABASES = {
     }
 }
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -131,7 +158,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'XNa0oQSrcRoG_2OVZI-EuF6p'
 # LOGIN_URL = '/login/google-oauth2'
 LOGOUT_URL = '/logout'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-LOGIN_REDIRECT_URL = 'http://localhost:3000/test'
+LOGIN_REDIRECT_URL = 'http://localhost:3000'
 LOGOUT_REDIRECT_URL = 'http://localhost:3000/'
 SOCIAL_AUTH_FACEBOOK_KEY = '2547900241974534'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'f9c5793fd295a75aab4743f16c91bf06'
