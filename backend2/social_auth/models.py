@@ -28,3 +28,12 @@ class CustomUser(models.Model):
 
     def __str__(self):
         return self.id
+
+
+class Recommend(models.Model):
+    UniqueSkills = models.CharField(max_length=100, null=True)
+    labels = models.CharField(max_length=100, null=True)
+
+
+
+

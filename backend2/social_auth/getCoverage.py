@@ -77,6 +77,7 @@ def getCoverage(user, requirement_filter):
         coverage_score = coverage_score + certification_match*weights.certification
 
         return {
+            "id": user.id
             "chosenExperience": chosenExperience,
             "chosenProjects": chosenProject,
             "chosenCertification": chosenCertification,

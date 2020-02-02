@@ -26,5 +26,8 @@ urlpatterns = [
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
     url('', include('social_django.urls', namespace='social')),
+<<<<<<< HEAD
     path('demo/', ResumeSubmit.as_view(), name="resume")
+=======
+>>>>>>> 701ff3b68a6b83eadf1700b4a931f509e8701287
 ]
